@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "d01eb3f8aca843146f17b5530cef49be8bd01b78"
+      }
+    },
+    {
+      "identity" : "useautolayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bielikb/UseAutoLayout",
+      "state" : {
+        "revision" : "f221d1e196c93708b357e4b15d1513513cbce446",
+        "version" : "1.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}
