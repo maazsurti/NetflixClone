@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8006C10C286B731100E1D3BE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C10B286B731100E1D3BE /* CreateAccountViewController.swift */; };
 		8015CC182856500B00A6577B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8015CC172856500B00A6577B /* LoginViewController.swift */; };
 		8015CC1A2856505900A6577B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8015CC192856505900A6577B /* SignUpViewController.swift */; };
 		803DC9632810B77000324826 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803DC9622810B77000324826 /* TitleTableViewCell.swift */; };
@@ -45,7 +44,6 @@
 		558D7FE36BCAC8890BB82CE0 /* Pods_Netflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		639935AE622EBE653C92677A /* Pods-Netflix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netflix.release.xcconfig"; path = "Target Support Files/Pods-Netflix/Pods-Netflix.release.xcconfig"; sourceTree = "<group>"; };
 		69D1AD0E316B48AB19DA8FFA /* Pods-Netflix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netflix.debug.xcconfig"; path = "Target Support Files/Pods-Netflix/Pods-Netflix.debug.xcconfig"; sourceTree = "<group>"; };
-		8006C10B286B731100E1D3BE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		8015CC172856500B00A6577B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8015CC192856505900A6577B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		803DC9622810B77000324826 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			children = (
 				8015CC172856500B00A6577B /* LoginViewController.swift */,
 				8015CC192856505900A6577B /* SignUpViewController.swift */,
-				8006C10B286B731100E1D3BE /* CreateAccountViewController.swift */,
 			);
 			path = "Login - Signup";
 			sourceTree = "<group>";
@@ -397,7 +394,6 @@
 				8099C727285FBF4800ADB64F /* AppUser.swift in Sources */,
 				80D7FE9727EDDF4F00B665CC /* DownloadsViewController.swift in Sources */,
 				8015CC182856500B00A6577B /* LoginViewController.swift in Sources */,
-				8006C10C286B731100E1D3BE /* CreateAccountViewController.swift in Sources */,
 				803DC96E2810EF7D00324826 /* SearchResultsViewController.swift in Sources */,
 				80CC7C9E27EDF9140087FC82 /* Extensions.swift in Sources */,
 				80E6520A28189D6300174897 /* YoutubeSearchResponse.swift in Sources */,

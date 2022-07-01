@@ -9,7 +9,9 @@ import UIKit
 import JGProgressHUD
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, SignUpViewControllerDelegate {
+    
+    private let signUpViewController = SignUpViewController()
     
     let spinner = JGProgressHUD(style: .dark)
     
@@ -91,7 +93,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        signUpViewController.emailCallback = { [weak self] email in
+            
+            self?.emailField.text = "\(email)"
+        }
         
         // Adding subviews
         
@@ -100,11 +105,18 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(signUpLabel)
         view.addSubview(signUpButton)
+        
+        configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        signUpViewController.delegate = self
     }
     
     @objc func signUpButtonTapped() {
         
-        let vc = CreateAccountViewController()
+        let vc = SignUpViewController()
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -177,6 +189,7 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             }
+            
         })
     }
     
@@ -198,6 +211,9 @@ class LoginViewController: UIViewController {
         
         leftItem.tintColor = .label
         
+        signUpViewController.delegate = self
+        
+        
     }
     
     private func applyConstraints() {      
@@ -218,5 +234,14 @@ class LoginViewController: UIViewController {
         
     }
 
+}
+
+extension LoginViewController {
+    
+    func didTapSignUp(_ email: String) {
+        
+        emailField.text = "\(email)"
+        
+    }
 }
 

@@ -81,9 +81,18 @@ extension NSNotification {
 
 extension UIViewController{
     
-    func alert(title: String, message: String){
+    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        if let handler = handler {
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: handler))
+            
+        } else {
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        }
+        
         self.present(alert, animated: true)
     }
 }
@@ -91,6 +100,7 @@ extension UIViewController{
 extension Notification.Name {
     /// Notification when user logs in
     static let didLogInNotification = Notification.Name("didLogInNotification")
+    static let didSignUp = Notification.Name("didSignUpNotification")
     static let didLogOut = Notification.Name("didLogOut")
     static let didOpenTheApp = Notification.Name("didOpenTheApp")
 }
@@ -102,6 +112,15 @@ extension String {
 
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
+    }
+}
+
+
+extension UITextField {
+    
+    func setPlaceholder(text: String, color: UIColor) {
+        
+        self.attributedPlaceholder = NSAttributedString(string: "\(text)", attributes: [NSAttributedString.Key.foregroundColor:color])
     }
 }
 

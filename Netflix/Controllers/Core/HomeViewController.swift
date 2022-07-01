@@ -18,9 +18,11 @@ enum Section: Int {
     case TopRated = 4
 }
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController {    
     
     var handle: AuthStateDidChangeListenerHandle?
+    
+    var didLogIn: Bool = false
     
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -53,7 +55,7 @@ class HomeViewController: UIViewController {
         }
         
         Auth.auth().removeStateDidChangeListener(handle)
-
+        
     }
     
     override func viewDidLoad() {
@@ -179,6 +181,7 @@ class HomeViewController: UIViewController {
         }
         
         userToken = nil
+        didLogIn = false
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
             
@@ -201,18 +204,9 @@ class HomeViewController: UIViewController {
     
     @objc func userProfileButton() {
         
-        if userToken != nil {
-            
-            let vc = ProfileViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            
-        } else {
-            
-            let nc = UINavigationController(rootViewController: LoginViewController())
-            nc.modalPresentationStyle = .fullScreen
-            present(nc, animated: true)
-        }
-        
+        let nc = UINavigationController(rootViewController: LoginViewController())
+        nc.modalPresentationStyle = .fullScreen
+        present(nc, animated: true)
         
     }
     
@@ -238,13 +232,13 @@ class HomeViewController: UIViewController {
     func getCurrentUserToken() {
         
         handle = Auth.auth().addStateDidChangeListener({ [weak self] _, user in
+            
+            if let user = user {
                 
-                if let user = user {
-                    
-                    self?.userToken = user
-                    self?.configureNavbar()
-                }
-         
+                self?.userToken = user
+                //self?.configureNavbar()
+            }
+            
         })
         
         if let user = Auth.auth().currentUser {
@@ -257,9 +251,18 @@ class HomeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main) { [weak self]_ in
             
+            self?.didLogIn = true
             self?.configureNavbar()
             
         }
+        
+//        NotificationCenter.default.addObserver(forName: .didSignUp, object: nil, queue: .main) { [weak self]_ in
+//
+//
+//            let nc = UINavigationController(rootViewController: LoginViewController())
+//            self?.present(nc, animated: true)
+//
+//        }
         
         NotificationCenter.default.addObserver(forName: .didLogOut, object: nil, queue: .main) { [weak self] _ in
             

@@ -9,7 +9,18 @@ import UIKit
 import JGProgressHUD
 import FirebaseAuth
 
+typealias callback = (String) -> ()
+
+protocol SignUpViewControllerDelegate: AnyObject {
+    
+    func didTapSignUp(_ email: String)
+}
+
 class SignUpViewController: UIViewController {
+    
+    var emailCallback: callback?
+    
+    weak var delegate: SignUpViewControllerDelegate?
     
     let spinner = JGProgressHUD(style: .dark)
     
@@ -22,8 +33,7 @@ class SignUpViewController: UIViewController {
         textField.leftView = UIView(frame:CGRect(x: 0, y: 0, width: 13, height: 0))
         textField.leftViewMode = .always
         textField.keyboardType = .emailAddress
-        textField.attributedPlaceholder = NSAttributedString(string: "First Name",
-                                                             attributes: [NSAttributedString.Key.foregroundColor: 1])
+        textField.setPlaceholder(text: "First Name", color: .placeholderText)
         textField.layer.cornerRadius = 13
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -162,7 +172,7 @@ class SignUpViewController: UIViewController {
 
         }
 
-        spinner.show(in: view)
+        //spinner.show(in: view)
 
         let AppUser =  AppUser(firstName: firstName,
                                lastName: lastName,
@@ -196,21 +206,21 @@ class SignUpViewController: UIViewController {
                 print("Details added")
             }
         })
-
-        DispatchQueue.main.async {
-
-            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
+        
+        if let emailAdd = emailCallback {
+            
+            emailAdd(email)
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2 ) {
-
-            self.spinner.dismiss(animated: true)
-            self.alert(title: "Success", message: "Account created Succesfully!")
-            self.navigationController?.dismiss(animated: true)
-
-            let vc = LoginViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+        
+        //self.spinner.dismiss(animated: true)
+        self.alert(title: "Success", message: "Account created Succesfully!") { [weak self]_  in
+            
+            self?.delegate?.didTapSignUp(email)
+            self?.navigationController?.popViewController(animated: true)
+            
         }
+        
+        //NotificationCenter.default.post(name: .didSignUp, object: nil)
 
     }
     
@@ -230,9 +240,16 @@ class SignUpViewController: UIViewController {
         
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         
+        //setting up placeholder data
+        firstNameField.text = "Maaz"
+        lastNameField.text = "Surti"
+        emailField.text = "maaz@gmail.com"
+        passwordField.text = "password"
+        retypePasswordField.text = "password"
+        
     }
     
-    private func applyConstraints() {
+    func applyConstraints() {
         
         firstNameField.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: nil, bottom: nil, padding: .init(top: 25, left: 30, bottom: 0, right: 0), size: .init(width: view.width - 60, height: 52))
         
