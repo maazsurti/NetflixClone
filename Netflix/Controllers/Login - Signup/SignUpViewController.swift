@@ -241,11 +241,11 @@ class SignUpViewController: UIViewController {
         signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         
         //setting up placeholder data
-        firstNameField.text = "Maaz"
-        lastNameField.text = "Surti"
-        emailField.text = "maaz@gmail.com"
-        passwordField.text = "password"
-        retypePasswordField.text = "password"
+//        firstNameField.text = "Maaz"
+//        lastNameField.text = "Surti"
+//        emailField.text = "maaz@gmail.com"
+//        passwordField.text = "password"
+//        retypePasswordField.text = "password"
         
     }
     

@@ -10,7 +10,7 @@ import Foundation
 struct Constants {
     static let API_KEY = "12e6cfaefc9999bbeba4b16e73cecbf9"
     static let baseURL = "https://api.themoviedb.org"
-    static let YOUTUBE_API_KEY = "AIzaSyAxJreKDGE7MyO3T6RscNySMjZ6P4sBDVg"
+    static let YOUTUBE_API_KEY = "AIzaSyDFrsqEzddmbFJ9iwdNjaCYRI95afNgUwE"
     static let YoutubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
@@ -179,8 +179,13 @@ class  APICaller {
                 return
             }
             
+            if let responseString = String(data: data, encoding: .utf8) {
+                print("Response: \(responseString)")
+            }
+            
             do {
                 let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                
                 completion(.success(results.items[0]))
                 
             } catch {
